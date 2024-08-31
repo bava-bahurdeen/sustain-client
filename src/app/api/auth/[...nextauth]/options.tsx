@@ -6,8 +6,14 @@ export const options: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!!,
+      authorization: {
+        params: {
+          scope: 'openid profile email',
+        },
+      },
     }),
   ],
+
   callbacks: {
     async jwt({ token, user }: { token: any; user: any }) {
       if (user) token.sub = user.id;

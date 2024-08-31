@@ -1,26 +1,22 @@
+import GoogleProvider from 'next-auth/providers/google';
+import { NextAuthOptions } from 'next-auth';
 
-import  GoogleProvider from 'next-auth/providers/google'
-import { NextAuthOptions } from 'next-auth'
-
-
-export const options:NextAuthOptions={
-
-  providers:[
+export const options: NextAuthOptions = {
+  providers: [
     GoogleProvider({
-        clientId: process.env.GOOGLE_CLIENT_ID!!,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET!!,
-      }),
+      clientId: process.env.GOOGLE_CLIENT_ID!!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!!,
+    }),
   ],
-  callbacks:{
-    
-    async jwt({token,user}:{token:any,user:any}){
-        if(user) token.sub=user.id
-        return token
+  callbacks: {
+    async jwt({ token, user }: { token: any; user: any }) {
+      if (user) token.sub = user.id;
+      return token;
     },
-    async session({session,token}:{session:any,token:any}){
-if(token)session.user.id=token.sub
-return session
-    }
+    async session({ session, token }: { session: any; token: any }) {
+      if (token) session.user.id = token.sub;
+      return session;
+    },
   },
-  secret:process.env.NEXT_SECRECT
-}
+  secret: process.env.NEXT_SECRECT,
+};

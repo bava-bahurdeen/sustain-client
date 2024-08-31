@@ -1,7 +1,4 @@
-import Sidebar from "../components/Sidebar";
-
-
-
+import Sidebar from '../components/Sidebar';
 
 export default function RootLayout({
   children,
@@ -9,14 +6,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-  <div className=" ">
-    
-
-  <Sidebar/>
-  <main className="h-svh bg-slate-300">
-
-  {children}
-  </main>
-  </div>
+    <div className=" ">
+      <Sidebar />
+      <main className="h-full bg-slate-300">{children}</main>
+    </div>
   );
 }

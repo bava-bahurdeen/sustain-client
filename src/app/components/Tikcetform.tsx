@@ -1,53 +1,74 @@
-'use client'
+'use client';
 import React from 'react';
-import { Form, Input, Select, Checkbox, InputNumber, TimePicker, Button, Row, Col } from 'antd';
+import {
+  Form,
+  Input,
+  Select,
+  Checkbox,
+  InputNumber,
+  TimePicker,
+  Button,
+  Row,
+  Col,
+} from 'antd';
 import axios from 'axios';
 
 const { Option } = Select;
 
 const Tikcetform = () => {
-  const onFinish = async(values: any) => {
-    try{
-await axios.post("http://localhost:5000/users",values)
-console.log("data Send successfully to the backend");
-
+  const onFinish = async (values: any) => {
+    try {
+      await axios.post('https://sustain-backend.onrender.com/ticket', values);
+    } catch (error: any) {
+      return error.message;
     }
-    catch(error:any){
-console.log(error.message)
-    }
-    console.log('Success:', values);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-4">
+    <div className="flex justify-center items-center min-h-screen p-4 overflow-hidden">
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
+        labelCol={{ span: 5 }}
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg"
-        >
-        <h2 className='text-2xl font-semibold  text-center mb-10 underline'>Raise a Ticket</h2>
+      >
+        <h2 className="text-2xl font-semibold  text-center mb-10 underline">
+          Raise a Ticket
+        </h2>
         <Form.Item
           label="Name"
           name="name"
           rules={[{ required: true, message: 'Please input your name!' }]}
         >
-          <Input />
+          <Input className="!p-2 " />
         </Form.Item>
-
+        <Form.Item
+          label="Number"
+          name="number"
+          rules={[
+            { required: true, message: 'Please input your number' },
+            {
+              min: 10,
+              message: 'Enter your correct mobile without country code....',
+            },
+          ]}
+        >
+          <Input className="!p-2" />
+        </Form.Item>
         <Form.Item
           label="Email"
           name="email"
-          rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
+          rules={[
+            {
+              required: true,
+              message: 'Please input your email!',
+              type: 'email',
+            },
+          ]}
         >
-          <Input />
+          <Input className="!p-2" />
         </Form.Item>
 
         <Form.Item
@@ -55,7 +76,7 @@ console.log(error.message)
           name="place"
           rules={[{ required: true, message: 'Please select an option!' }]}
         >
-          <Select placeholder="Select an option">
+          <Select placeholder="Select an option" className="!h-10  ">
             <Option value="Tnagar 600006">T.nagar</Option>
             <Option value="Anna nagar 600040">Anna nagar</Option>
             <Option value="Mogappier 600037">Mogappier</Option>
@@ -63,82 +84,61 @@ console.log(error.message)
           </Select>
         </Form.Item>
 
-        
-        <Form.Item  >
-          <Row gutter={16} align="middle" className='!flex !justify-center !items-center' >
-            <Col>
-              <Checkbox>Plastic</Checkbox>
-            </Col>
-            <Col>
-            <Form.Item name={'plastic'}>
+        <div className="flex justify-center items-center">
+          <Form.Item>
+            <Checkbox>Plastic</Checkbox>
+          </Form.Item>
+          <Form.Item name={'plastic'}>
+            <InputNumber min={1} defaultValue={1} />
+          </Form.Item>
+        </div>
 
-              <InputNumber min={1}  defaultValue={1} />
-            </Form.Item>
-            </Col>
-          </Row>
-        </Form.Item>
-        <Form.Item >
-          <Row gutter={16} align="middle" className='!flex !justify-center !items-center'>
-            <Col>
-              <Checkbox>Paper</Checkbox>
-            </Col>
-            <Col>
-            <Form.Item name={'paper'}>
+        <div className="flex justify-center items-center">
+          <Form.Item>
+            <Checkbox>Paper</Checkbox>
+          </Form.Item>
+          <Form.Item name={'paper'}>
+            <InputNumber min={1} defaultValue={1} />
+          </Form.Item>
+        </div>
 
-              <InputNumber min={1}  defaultValue={1} />
-            </Form.Item>
-            </Col>
-          </Row>
-        </Form.Item>
-        <Form.Item >
-          <Row gutter={16} align="middle" className='!flex !justify-center !items-center'>
-            <Col>
-              <Checkbox>Old untorn dresses</Checkbox>
-            </Col>
-            <Col>
-            <Form.Item name={'old_untorn_dresses'}>
+        <div className="flex justify-center items-center">
+          <Form.Item>
+            <Checkbox>Old_dresses</Checkbox>
+          </Form.Item>
+          <Form.Item name={'old_untorn_dresses'}>
+            <InputNumber min={1} defaultValue={1} />
+          </Form.Item>
+        </div>
 
-              <InputNumber min={1}  defaultValue={1} />
-            </Form.Item>
-            </Col>
-          </Row>
-        </Form.Item>
-        <Form.Item>
-          <Row gutter={16} align="middle" className='!flex !justify-center !items-center'>
-            <Col>
-              <Checkbox>Decarative materials</Checkbox>
-            </Col>
-            <Col>
-            <Form.Item >
+        <div className="flex justify-center items-center">
+          <Form.Item>
+            <Checkbox>Decarative_materials</Checkbox>
+          </Form.Item>
+          <Form.Item name="decarative_materials">
+            <InputNumber min={1} defaultValue={1} />
+          </Form.Item>
+        </div>
 
-              <InputNumber min={1} defaultValue={1} />
-            </Form.Item>
-            </Col>
-          </Row>
-        </Form.Item>
-        <Form.Item  >
-          <Row gutter={16} align="middle" className='!flex !justify-center !items-center'>
-            <Col>
-              <Checkbox>Leather</Checkbox>
-            </Col>
-            <Col>
-            <Form.Item name={'leather'}>
+        <div className="flex justify-center items-center">
+          <Form.Item>
+            <Checkbox>Leather</Checkbox>
+          </Form.Item>
+          <Form.Item name={'leather'}>
+            <InputNumber min={1} max={10} defaultValue={1} />
+          </Form.Item>
+        </div>
 
-              <InputNumber min={1} max={10} defaultValue={1} />
-            </Form.Item>
-            </Col>
-          </Row>
-        </Form.Item>
         <Form.Item
           label="Time"
           name="time"
           rules={[{ required: true, message: 'Please select a time!' }]}
         >
-          <TimePicker use12Hours  format="h:mm a" />
+          <TimePicker use12Hours format="h:mm a" />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit" className='!p-5 !py-2 '>
+          <Button type="primary" htmlType="submit" className="!p-5 !py-2 ">
             Submit
           </Button>
         </Form.Item>

@@ -12,7 +12,7 @@ import {
   Col,
 } from 'antd';
 import axios from 'axios';
-import { Bounce, toast } from 'react-toastify';
+import { ToastContainer, Bounce, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const { Option } = Select;
 
@@ -38,6 +38,7 @@ const Tikcetform = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen p-4 overflow-hidden">
+      <ToastContainer />
       <Form
         name="basic"
         labelCol={{ span: 5 }}

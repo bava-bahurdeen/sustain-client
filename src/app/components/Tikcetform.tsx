@@ -12,13 +12,25 @@ import {
   Col,
 } from 'antd';
 import axios from 'axios';
-
+import { Bounce, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const { Option } = Select;
 
 const Tikcetform = () => {
   const onFinish = async (values: any) => {
     try {
       await axios.post('https://sustain-backend.onrender.com/ticket', values);
+      toast('🦄 Successfully submitted...', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Bounce,
+      });
     } catch (error: any) {
       return error.message;
     }
